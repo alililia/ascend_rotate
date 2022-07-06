@@ -87,15 +87,6 @@ bash run_infer_310.sh [MINDIR_HEAD_PATH] [MINDIR_TAIL_PATH] [DATASET_PATH] [NEED
 <https://www.mindspore.cn/tutorials/experts/zh-CN/master/parallel/train_ascend.html#配置分布式环境变量>
 
 
-```bash
-# 运行单卡训练示例
-bash scripts/run_standalone_train.sh [DEVICE_ID] [DEVICE_TARGET] [OUTPUT_PATH] [MAX_STEPS] [LOG_FILE]
-
-# 运行分布式训练示例
-
-# 运行评估示例
-bash scripts/run_eval.sh [DEVICE_ID] [DEVICE_TARGET] [EVAL_CHECKPOINT] [EVAL_LOG_FILE]
-```
 
 # [脚本说明](#目录)
 
@@ -171,14 +162,9 @@ bash scripts/run_eval.sh [DEVICE_ID] [DEVICE_TARGET] [EVAL_CHECKPOINT] [EVAL_LOG
   ...
   ```
 
-  模型检查点保存在当前目录下。
+ 
 
 
-  ``` bash
-  ```
-
-
-  训练结束后，您可在默认脚本文件夹下找到检查点文件。
 
 ### [分布式训练](#目录)
 
@@ -203,8 +189,6 @@ bash scripts/run_eval.sh [DEVICE_ID] [DEVICE_TARGET] [EVAL_CHECKPOINT] [EVAL_LOG
   ```
 
 
-  ```bash
-  ```
 
 
 ## [评估过程](#目录)
@@ -230,15 +214,7 @@ bash scripts/run_eval.sh [DEVICE_ID] [DEVICE_TARGET] [EVAL_CHECKPOINT] [EVAL_LOG
   ```
 
 
-  在运行以下命令之前，请检查用于评估的检查点路径。
-
-  ```bash
-  ```
-
-
-  ```bash
-  {'MRR': 0.4760354072358681, 'MR': 3325.9582003828973, 'HITS@1': 0.42756860242501593, 'HITS@3': 0.49505424377791957, 'HITS@10': 0.5724313975749841}
-  ```
+  
 
 ## [导出过程](#目录)
 
@@ -272,33 +248,34 @@ python export.py --eval_checkpoint [EVAL_CHECKPOINT] --file_format [FILE_FORMAT]
 
 ### [训练性能](#目录)
 
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 资源          | Ascend 910；CPU 2.60GHz，192核；内存 755G；系统 Euler2.8     | Tesla V100-SXM2-32GB                                         |
-| 上传日期      | 2021-12-01                                                   | 2021-12-01                                                   |
-| MindSpore版本 | 1.5.0                                                        | 1.5.0                                                        |
-| 数据集        | WN18RR                                                       | WN18RR                                                       |
-| 训练参数      | batch_size=512, negative_sample_size=1024, hidden_dim=500, gamma=6.0, alpha=0.5, lr=0.00005, max_steps=80000 | batch_size=512, negative_sample_size=1024, hidden_dim=500, gamma=6.0, alpha=0.5, lr=0.00005, max_steps=70000 |
-| 优化器        | Adam                                                         | Adam                                                         |
-| 损失函数      | 自对抗负采样Self-adversarial Negative Sampling Loss Function | 自对抗负采样Self-adversarial Negative Sampling Loss Function |
-| 速度          | 单卡：141ms/step；8卡：24ms/step                             | 单卡：284ms/step；8卡：90ms/step                             |
-| 总时长        | 单卡：294min；8卡：38min                                     | 单卡：360min；8卡：107min                                    |
-| 微调检查点    | 156M (.ckpt文件)                                             | 156M (.ckpt文件)                                             |
-
+| 参数          | Ascend                                                       | 
+| ------------- | ------------------------------------------------------------ | 
+| 资源          | Ascend 910；CPU 2.60GHz，192核；内存 755G；系统 Euler2.8     | T
+| 上传日期      | 2021-12-01                                                   | 
+| MindSpore版本 | 1.5.0                                                        |
+| 数据集        | WN18RR                                                       | 
+| 训练参数      | batch_size=512, negative_sample_size=1024, hidden_dim=500, gamma=6.0, alpha=0.5, lr=0.00005, max_steps=80000 | 
+| 优化器        | Adam                                                         |
+| 损失函数      | 自对抗负采样Self-adversarial Negative Sampling Loss Function | 
+| 速度          | 单卡：141ms/step；8卡：24ms/step                             | 
+| 总时长        | 单卡：294min；8卡：38min                                     | 
+| 微调检查点    | 156M (.ckpt文件)                                             |
 ### [评估描述](#目录)
 
-| ------------------- | ------------------- | ------------------- |
-| 模型版本       | RotatE            | RotatE     |
-| 资源            | Ascend 910, 系统 Euler2.8 | Tesla V100-SXM2-32GB |
-| 上传日期       | 2021-12-17 | 2021-12-17 |
-| MindSpore版本   | 1.5.0                 | 1.5.0           |
-| 数据集             | wn18rr                  | wn18rr            |
-| 输出             | score | score |
-| MRR           | 单卡：0.475194；8卡：0.475609                            | 单卡：0.476046；8卡：0.476035 |
-| MR            | 单卡：3239.53；8卡：3240.68                              | 单卡：3327.17；8卡：3325.95 |
-| HITS@1        | 单卡：0.426132；8卡：0.426292                            | 单卡：0.428206；8卡：0.427568 |
-| HITS@3        | 单卡：0.495213；8卡：0.494894                            | 单卡：0.494097；8卡：0.495054 |
-| HITS@10       | 单卡：0.575462；8卡：0.574984                            | 单卡：0.572112；8卡：0.572431 |
-| 推理模型 | 156M (.ckpt文件)          | 156M (.ckpt文件) |
+| 参数          | Ascend                      | 
+| ------------------- | ------------------- |
+| 模型版本       | RotatE            |
+| 资源            | Ascend 910, 系统 Euler2.8 |
+| 上传日期       | 2021-12-17 | 
+| MindSpore版本   | 1.5.0                 | 
+| 数据集             | wn18rr                  | 
+| 输出             | score | 
+| MRR           | 单卡：0.475194；8卡：0.475609                            | 
+| MR            | 单卡：3239.53；8卡：3240.68                              | 
+| HITS@1        | 单卡：0.426132；8卡：0.426292                            | 
+| HITS@3        | 单卡：0.495213；8卡：0.494894                            | 
+| HITS@10       | 单卡：0.575462；8卡：0.574984                            | 
+| 推理模型 | 156M (.ckpt文件)          | 
 
 ### [推理描述](#目录)
 
